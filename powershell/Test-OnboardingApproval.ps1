@@ -36,6 +36,18 @@ foreach ($Field in $RequiredFields) {
         exit 4
     }
 }
+if (
+    $null -eq $Employee.RequestedAccess -or
+    $Employee.RequestedAccess -isnot [array] -or
+    $Employee.RequestedAccess.Count -eq 0 -or
+    @($Employee.RequestedAccess | Where-Object {
+        -not [string]::IsNullOrWhiteSpace([string]$_)
+    }).Count -ne $Employee.RequestedAccess.Count
+) {
+    Write-Output "ONBOARDING BLOCKED"
+    Write-Output "Reason: RequestedAccess must contain at least one non-empty access item."
+    exit 5
+}
 
 if ($Employee.ApprovalStatus -ne "Approved") {
     Write-Output "ACCESS NOT AUTHORIZED"
