@@ -1,45 +1,145 @@
-﻿# Test Report: Onboarding Approval Validation
+﻿\# Test Report: Onboarding Approval Validation
 
-## Objective
 
-Verify that the onboarding approval validation script
-rejects requests without approval and handles missing input files.
 
-## Test Case 1 — Pending Approval
+\## Objective
 
-**Input:** employee-joiner.json
 
-**ApprovalStatus:** Pending
 
-**Expected result:** Access is not authorized.
+Verify that the onboarding validation script:
 
-**Actual result:**
-- Output: ACCESS NOT AUTHORIZED
-- Reason: Approval status is Pending
-- Exit code: 2
+\- Rejects requests without approval.
 
-**Status:** PASS
+\- Accepts approved requests with complete required data.
 
-## Test Case 2 — Missing Employee File
+\- Rejects requests with missing required fields.
 
-**Input:** employee-does-not-exist.json
+\- Handles missing input files and invalid JSON.
 
-**Expected result:** The script reports that the employee file
-cannot be found and stops processing.
 
-**Actual result:**
-- Output: Employee file not found
-- Exit code: 1
 
-**Status:** PASS
+\## Test Case 1 — Pending Approval
 
-## Limitations
 
-These tests were executed in a local PowerShell session using
-synthetic employee data.
 
-No Active Directory accounts, production identities,
-or real access permissions were created or changed.
+\*\*Input:\*\* `employee-joiner.json`
 
-The script currently validates approval status and input-file
-existence only. Additional validation and test cases are planned.
+\*\*ApprovalStatus:\*\* `Pending`
+
+
+
+\*\*Expected result:\*\* Access is not authorized.
+
+
+
+\*\*Actual result:\*\*
+
+\- Output: `ACCESS NOT AUTHORIZED`
+
+\- Exit code: `2`
+
+
+
+\*\*Status:\*\* PASS
+
+
+
+\## Test Case 2 — Missing Employee File
+
+
+
+\*\*Input:\*\* `employee-does-not-exist.json`
+
+
+
+\*\*Expected result:\*\* The script reports that the employee file cannot be found and stops processing.
+
+
+
+\*\*Actual result:\*\*
+
+\- Output: `Employee file not found`
+
+\- Exit code: `1`
+
+
+
+\*\*Status:\*\* PASS
+
+
+
+\## Test Case 3 — Approved Request With Complete Data
+
+
+
+\*\*Input:\*\* Temporary synthetic test file
+
+\*\*ApprovalStatus:\*\* `Approved`
+
+
+
+\*\*Expected result:\*\* Required data and approval are verified.
+
+
+
+\*\*Actual result:\*\*
+
+\- Output: `REQUIRED DATA VERIFIED`
+
+\- Output: `APPROVAL VERIFIED`
+
+\- Employee: `Alex Morgan`
+
+
+
+\*\*Status:\*\* PASS
+
+
+
+\## Test Case 4 — Approved Request With Missing Department
+
+
+
+\*\*Input:\*\* Temporary synthetic test file
+
+\*\*ApprovalStatus:\*\* `Approved`
+
+\*\*Department:\*\* Empty
+
+
+
+\*\*Expected result:\*\* Onboarding is blocked because a required field is missing.
+
+
+
+\*\*Actual result:\*\*
+
+\- Output: `ONBOARDING BLOCKED`
+
+\- Reason: Required field `Department` is missing or empty.
+
+\- Exit code: `4`
+
+
+
+\*\*Status:\*\* PASS
+
+
+
+\## Limitations
+
+
+
+Tests were executed in a local PowerShell session using synthetic employee data.
+
+
+
+No Active Directory accounts, production identities, or real access permissions were created or changed.
+
+
+
+The script validates input-file existence, JSON parsing, required employee fields, and approval status. It does not create accounts, assign permissions, or verify actual access.
+
+
+
+Invalid JSON handling was tested successfully. The script reported "Employee file contains invalid JSON."
