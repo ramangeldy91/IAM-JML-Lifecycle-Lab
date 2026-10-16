@@ -1,0 +1,12 @@
+﻿{
+  "EmployeeID": "LAB-1001",
+  "FirstName": "Alex",
+  "LastName": "Morgan",
+  "Department": "IT Support",
+  "JobTitle": "Help Desk Analyst",
+  "EmploymentStatus": "Pending",
+  "RequestedAccess": [
+    "HelpDesk-Basic"
+  ],
+  "ApprovalStatus": "Pending"
+}
