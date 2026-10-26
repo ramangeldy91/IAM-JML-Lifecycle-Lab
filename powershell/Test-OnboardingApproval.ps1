@@ -49,6 +49,17 @@ if (
     exit 5
 }
 
+$AllowedAccess = @(
+    "HelpDesk-Basic"
+)
+
+foreach ($Access in $Employee.RequestedAccess) {
+    if ($Access -notin $AllowedAccess) {
+        Write-Output "ONBOARDING BLOCKED"
+        Write-Output "Reason: Requested access item '$Access' is not allowed by lab policy."
+        exit 6
+    }
+}
 if ($Employee.ApprovalStatus -ne "Approved") {
     Write-Output "ACCESS NOT AUTHORIZED"
     Write-Output "Reason: Approval status is '$($Employee.ApprovalStatus)'."
