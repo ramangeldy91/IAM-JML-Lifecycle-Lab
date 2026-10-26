@@ -236,3 +236,21 @@ Invalid JSON handling was tested successfully. The script reported "Employee fil
 The lab uses synthetic employee data and local PowerShell execution. It does not create Active Directory accounts, assign real permissions, or connect to a production identity system.
 
 The access allowlist currently permits only `HelpDesk-Basic`. This is a simplified lab policy, not a complete organizational authorization model. The script checks requested group names against this allowlist but does not provision access or validate permissions in an actual directory.
+
+## Automated Test Runner
+
+**Test script:** `powershell/Test-OnboardingApproval.Tests.ps1`
+
+The automated test runner executes the onboarding validator in a separate PowerShell process and checks both the exit code and expected output.
+
+### Automated Test Results
+
+| Scenario | Expected exit code | Result |
+|---|---:|---|
+| Approved request with allowed access | 0 | PASS |
+| Pending approval is rejected | 2 | PASS |
+| Disallowed access is rejected | 6 | PASS |
+
+**Summary:** 3 passed; 0 failed.
+
+The test runner creates a temporary synthetic employee JSON file and removes it after execution. It does not modify the original `employee-joiner.json` file.
