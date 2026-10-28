@@ -1,0 +1,16 @@
+﻿{
+  "EmployeeID": "LAB-1001",
+  "FirstName": "Alex",
+  "LastName": "Morgan",
+  "CurrentDepartment": "IT Support",
+  "CurrentJobTitle": "Help Desk Analyst",
+  "CurrentAccess": [
+    "HelpDesk-Basic"
+  ],
+  "NewDepartment": "Human Resources",
+  "NewJobTitle": "HR Analyst",
+  "RequestedAccess": [
+    "HR-Basic"
+  ],
+  "ApprovalStatus": "Pending"
+}

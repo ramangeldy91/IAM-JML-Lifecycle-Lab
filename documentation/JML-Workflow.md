@@ -77,3 +77,65 @@ This document describes a proposed workflow for a simulated lab.
 Actual technical implementations and verification evidence will be added
 as the lab develops. Production procedures must follow the organization's
 approved policies and identity platform capabilities.
+
+## 7. Mover Lab Implementation
+
+### Objective
+
+Validate a simulated employee role-change request before proceeding to access reconciliation.
+
+### Test Scenario
+
+A synthetic employee changes from:
+
+- **Current department:** IT Support
+
+- **Current job title:** Help Desk Analyst
+
+- **Current access:** `HelpDesk-Basic`
+
+To:
+
+- **New department:** Human Resources
+
+- **New job title:** HR Analyst
+
+- **Requested access:** `HR-Basic`
+
+The request must have an `Approved` status before it can proceed.
+
+### Validation Controls
+
+The PowerShell validator checks:
+
+1. The employee JSON file exists and contains valid JSON.
+
+2. Required employee and role-change fields are present.
+
+3. Current and requested access lists contain valid, non-empty items.
+
+4. The new job title is defined in the lab's role-access policy.
+
+5. Requested access is permitted for the new role.
+
+6. The request has the required approval status.
+
+### Automated Test Results
+
+The automated test suite verifies three scenarios:
+
+- An approved request with role-allowed access is accepted.
+
+- A request with pending approval is rejected.
+
+- A request for disallowed access, such as `Domain-Admin` for an HR Analyst, is rejected.
+
+**Latest test result:** 3 passed, 0 failed.
+
+### Implementation Limitations
+
+The current validator checks request data, approval status, and role-based access eligibility. It does not create or modify accounts, assign or revoke permissions, or automatically reconcile current access with the new role's requirements.
+
+Before any access changes in a real environment, the responsible administrator must follow the organization's approved procedures, verify authorization, assess which existing permissions remain necessary, and confirm the resulting access.
+
+This lab uses synthetic employee data and does not modify real Windows accounts.
