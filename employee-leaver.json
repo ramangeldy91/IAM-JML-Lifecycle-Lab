@@ -1,0 +1,9 @@
+﻿{
+  "EmployeeID": "LAB-1001",
+  "FirstName": "Alex",
+  "LastName": "Morgan",
+  "Department": "Human Resources",
+  "JobTitle": "HR Analyst",
+  "DepartureDateTime": "2026-11-15T17:00:00",
+  "ApprovalStatus": "Pending"
+}

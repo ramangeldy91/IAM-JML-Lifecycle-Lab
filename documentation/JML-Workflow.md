@@ -1,4 +1,4 @@
-﻿# Joiner-Mover-Leaver (JML) Workflow
+# Joiner-Mover-Leaver (JML) Workflow
 
 ## 1. Purpose
 
@@ -137,5 +137,53 @@ The automated test suite verifies three scenarios:
 The current validator checks request data, approval status, and role-based access eligibility. It does not create or modify accounts, assign or revoke permissions, or automatically reconcile current access with the new role's requirements.
 
 Before any access changes in a real environment, the responsible administrator must follow the organization's approved procedures, verify authorization, assess which existing permissions remain necessary, and confirm the resulting access.
+
+This lab uses synthetic employee data and does not modify real Windows accounts.
+
+## 8. Leaver Lab Implementation
+
+### Objective
+
+Validate employee offboarding requests before they proceed to an authorized execution process. The lab checks required employee data, departure date and time format, and approval status.
+
+### Synthetic Scenario
+
+Employee: Alex Morgan
+Employee ID: LAB-1001
+Department: Human Resources
+Job Title: HR Analyst
+Departure Date and Time: 2026-11-15T17:00:00
+Initial Approval Status: Pending
+
+The employee record uses synthetic data. The initial request remains pending and must not proceed until the required approval is confirmed.
+
+### Validation Controls
+
+The PowerShell validator (`powershell/Test-LeaverApproval.ps1`) checks:
+
+1. The employee data file exists.
+2. The JSON document is valid.
+3. Required fields are present and non-empty.
+4. `DepartureDateTime` matches the required `yyyy-MM-ddTHH:mm:ss` format and can be parsed.
+5. `ApprovalStatus` is `Approved`.
+
+The validator returns distinct exit codes for missing files, invalid JSON, missing required fields, pending approval, and invalid departure date formats.
+
+### Automated Test Results
+
+The automated test suite (`powershell/Test-LeaverApproval.Tests.ps1`) verifies four scenarios:
+
+- An approved request with a valid departure date is accepted.
+- A request with pending approval is rejected.
+- An invalid departure date format is rejected.
+- A request missing a required field is rejected.
+
+**Latest test result:** 4 passed, 0 failed.
+
+### Implementation Limitations
+
+This validator checks request data, departure date format, and approval status. It does not disable accounts, revoke sessions or tokens, remove group memberships, recover assets, or change permissions.
+
+In a real environment, offboarding actions must be performed by authorized personnel in accordance with approved organizational procedures and the effective departure time. The resulting access state must then be verified and documented.
 
 This lab uses synthetic employee data and does not modify real Windows accounts.
