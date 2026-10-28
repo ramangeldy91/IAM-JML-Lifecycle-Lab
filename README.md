@@ -2,38 +2,55 @@
 
 ## Project Overview
 
-This project simulates Identity and Access Management (IAM) processes
-for the employee identity lifecycle: Joiner, Mover, and Leaver (JML).
+This project simulates Identity and Access Management (IAM) processes across the employee identity lifecycle: Joiner, Mover, and Leaver (JML).
 
 ## Objectives
 
 - Practice employee onboarding, role changes, and offboarding.
 - Apply the principle of least privilege.
-- Document identity lifecycle workflows and access control decisions.
-- Develop basic PowerShell skills for IAM-related tasks.
+- Validate approvals before access-related requests proceed.
+- Develop PowerShell scripting and automated testing skills.
+- Document IAM workflows, security controls, and test evidence.
 - Build a portfolio project for Help Desk and Junior IAM roles.
 
-## Scope
+## Implemented Workflows
 
-The lab uses test data and a controlled local environment.
-No employer systems, real employee accounts, or confidential data are used.
+### Joiner — Onboarding
+- Validates required employee data.
+- Checks requested access against an approved allowlist.
+- Rejects requests without the required approval.
+- Includes automated validation tests.
 
-## Project Status
+### Mover — Role Change
+- Validates employee and access request data.
+- Checks current and requested access.
+- Validates role mapping and approval status.
+- Includes automated validation tests.
 
-Status: In progress.
+### Leaver — Offboarding
+- Validates employee data and departure date.
+- Rejects requests without the required approval.
+- Includes automated validation tests.
 
-## Planned Deliverables
+## Automated Test Results
 
-- JML workflow documentation.
-- Onboarding and offboarding standard operating procedures (SOPs).
-- Access control and least privilege documentation.
-- PowerShell scripts and verification results.
-- Lab evidence and troubleshooting notes.
+- Joiner: 3 tests passed.
+- Mover: 3 tests passed.
+- Leaver: 4 tests passed.
+- Total: 10 tests passed, 0 failed.
 
 ## Security Principles
 
 - Least privilege.
-- Authorization before access changes.
-- Verification after each change.
-- Documentation and accountability.
-- Safe testing with non-production data.
+- Approval before access-related actions.
+- Input validation.
+- Verification and documentation.
+- Safe testing with synthetic data.
+
+## Scope and Limitations
+
+This is a controlled lab using synthetic employee data. The scripts validate requests and approvals; they do not create, modify, or disable real user accounts, change permissions, revoke sessions, or execute production access changes.
+
+## Project Status
+
+Status: In progress.
