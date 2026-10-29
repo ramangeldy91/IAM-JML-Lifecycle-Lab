@@ -87,6 +87,18 @@ try {
         -Name "Disallowed access is rejected" `
         -ExpectedExitCode 6 `
         -ExpectedOutput "MOVE BLOCKED"
+
+    $Employee.CurrentAccess = @("Domain-Admin")
+    $Employee.RequestedAccess = @("HR-Basic")
+    $Employee.ApprovalStatus = "Approved"
+
+    $Employee | ConvertTo-Json -Depth 5 |
+        Set-Content -LiteralPath $TestDataPath -Encoding utf8
+
+    Invoke-MoverTest `
+        -Name "Disallowed current access is rejected" `
+        -ExpectedExitCode 6 `
+        -ExpectedOutput "Current access item 'Domain-Admin' is not allowed"
 }
 finally {
     if (Test-Path -LiteralPath $TestDataPath) {

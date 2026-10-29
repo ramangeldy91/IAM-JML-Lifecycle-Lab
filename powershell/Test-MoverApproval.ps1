@@ -68,6 +68,22 @@ if (-not $AllowedAccessByRole.ContainsKey($Employee.NewJobTitle)) {
 
 $AllowedAccess = $AllowedAccessByRole[$Employee.NewJobTitle]
 
+if (-not $AllowedAccessByRole.ContainsKey($Employee.CurrentJobTitle)) {
+    Write-Output "MOVE BLOCKED"
+    Write-Output "Reason: Current job title is not defined in lab access policy."
+    exit 6
+}
+
+$AllowedCurrentAccess = $AllowedAccessByRole[$Employee.CurrentJobTitle]
+
+foreach ($Access in $Employee.CurrentAccess) {
+    if ($Access -notin $AllowedCurrentAccess) {
+        Write-Output "MOVE BLOCKED"
+        Write-Output "Reason: Current access item '$Access' is not allowed for the current role."
+        exit 6
+    }
+}
+
 foreach ($Access in $Employee.RequestedAccess) {
     if ($Access -notin $AllowedAccess) {
         Write-Output "MOVE BLOCKED"
