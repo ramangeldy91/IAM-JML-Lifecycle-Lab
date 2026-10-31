@@ -35,9 +35,9 @@ This project simulates Identity and Access Management (IAM) processes across the
 ## Automated Test Results
 
 - Joiner: 3 tests passed.
-- Mover: 3 tests passed.
+- Mover: 4 tests passed.
 - Leaver: 4 tests passed.
-- Total: 10 tests passed, 0 failed.
+- Total: 11 tests passed, 0 failed.
 
 ## Security Principles
 
