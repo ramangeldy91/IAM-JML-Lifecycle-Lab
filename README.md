@@ -1,4 +1,4 @@
-﻿# IAM JML Lifecycle Lab
+# IAM JML Lifecycle Lab
 
 ## Project Overview
 
@@ -53,4 +53,4 @@ This is a controlled lab using synthetic employee data. The scripts validate req
 
 ## Project Status
 
-Status: In progress.
+Status: Completed - all three JML workflows implemented and validated with 11 passing tests.

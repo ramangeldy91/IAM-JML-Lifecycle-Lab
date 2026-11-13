@@ -1,132 +1,132 @@
-﻿\# Test Report: Onboarding Approval Validation
+# Test Report: Onboarding Approval Validation
 
 
 
-\## Objective
+## Objective
 
 
 
 Verify that the onboarding validation script:
 
-\- Rejects requests without approval.
+- Rejects requests without approval.
 
-\- Accepts approved requests with complete required data.
+- Accepts approved requests with complete required data.
 
-\- Rejects requests with missing required fields.
+- Rejects requests with missing required fields.
 
-\- Handles missing input files and invalid JSON.
+- Handles missing input files and invalid JSON.
 
 
 
-\## Test Case 1 — Pending Approval
+## Test Case 1 — Pending Approval
 
 
 
-\*\*Input:\*\* `employee-joiner.json`
+**Input:** `employee-joiner.json`
 
-\*\*ApprovalStatus:\*\* `Pending`
+**ApprovalStatus:** `Pending`
 
 
 
-\*\*Expected result:\*\* Access is not authorized.
+**Expected result:** Access is not authorized.
 
 
 
-\*\*Actual result:\*\*
+**Actual result:**
 
-\- Output: `ACCESS NOT AUTHORIZED`
+- Output: `ACCESS NOT AUTHORIZED`
 
-\- Exit code: `2`
+- Exit code: `2`
 
 
 
-\*\*Status:\*\* PASS
+**Status:** PASS
 
 
 
-\## Test Case 2 — Missing Employee File
+## Test Case 2 — Missing Employee File
 
 
 
-\*\*Input:\*\* `employee-does-not-exist.json`
+**Input:** `employee-does-not-exist.json`
 
 
 
-\*\*Expected result:\*\* The script reports that the employee file cannot be found and stops processing.
+**Expected result:** The script reports that the employee file cannot be found and stops processing.
 
 
 
-\*\*Actual result:\*\*
+**Actual result:**
 
-\- Output: `Employee file not found`
+- Output: `Employee file not found`
 
-\- Exit code: `1`
+- Exit code: `1`
 
 
 
-\*\*Status:\*\* PASS
+**Status:** PASS
 
 
 
-\## Test Case 3 — Approved Request With Complete Data
+## Test Case 3 — Approved Request With Complete Data
 
 
 
-\*\*Input:\*\* Temporary synthetic test file
+**Input:** Temporary synthetic test file
 
-\*\*ApprovalStatus:\*\* `Approved`
+**ApprovalStatus:** `Approved`
 
 
 
-\*\*Expected result:\*\* Required data and approval are verified.
+**Expected result:** Required data and approval are verified.
 
 
 
-\*\*Actual result:\*\*
+**Actual result:**
 
-\- Output: `REQUIRED DATA VERIFIED`
+- Output: `REQUIRED DATA VERIFIED`
 
-\- Output: `APPROVAL VERIFIED`
+- Output: `APPROVAL VERIFIED`
 
-\- Employee: `Alex Morgan`
+- Employee: `Alex Morgan`
 
 
 
-\*\*Status:\*\* PASS
+**Status:** PASS
 
 
 
-\## Test Case 4 — Approved Request With Missing Department
+## Test Case 4 — Approved Request With Missing Department
 
 
 
-\*\*Input:\*\* Temporary synthetic test file
+**Input:** Temporary synthetic test file
 
-\*\*ApprovalStatus:\*\* `Approved`
+**ApprovalStatus:** `Approved`
 
-\*\*Department:\*\* Empty
+**Department:** Empty
 
 
 
-\*\*Expected result:\*\* Onboarding is blocked because a required field is missing.
+**Expected result:** Onboarding is blocked because a required field is missing.
 
 
 
-\*\*Actual result:\*\*
+**Actual result:**
 
-\- Output: `ONBOARDING BLOCKED`
+- Output: `ONBOARDING BLOCKED`
 
-\- Reason: Required field `Department` is missing or empty.
+- Reason: Required field `Department` is missing or empty.
 
-\- Exit code: `4`
+- Exit code: `4`
 
 
 
-\*\*Status:\*\* PASS
+**Status:** PASS
 
 
 
-\## Limitations
+## Limitations
 
 
 
